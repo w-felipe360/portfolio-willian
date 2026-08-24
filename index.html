@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://willfelipe.com.br/" />
+
+    <title>Willian Braz — Desenvolvedor Full Stack</title>
+    <meta
+      name="description"
+      content="Desenvolvedor Full Stack. React, Next.js e Angular no front; Node.js, NestJS, Spring Boot e Grails no back. Bancos relacionais, Docker e AWS."
+    />
+    <meta name="author" content="Willian Braz" />
+    <meta name="theme-color" content="#0a0710" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Willian Braz" />
+    <meta property="og:title" content="Willian Braz — Desenvolvedor Full Stack" />
+    <meta
+      property="og:description"
+      content="Full stack: React, Next.js, Angular, Node.js, NestJS, Spring Boot, Grails, Docker e AWS."
+    />
+    <meta property="og:url" content="https://willfelipe.com.br/" />
+    <meta property="og:image" content="https://willfelipe.com.br/og.jpg" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- tema aplicado antes da primeira pintura; escuro é o padrão da identidade -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("wfb-theme");
+          var dark = saved !== "light";
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.style.colorScheme = dark ? "dark" : "light";
+        } catch (e) {}
+        try {
+          var lang = localStorage.getItem("wfb-lang");
+          if (lang) document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

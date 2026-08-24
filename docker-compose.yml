@@ -1,0 +1,9 @@
+services:
+  portfolio:
+    build: .
+    image: portfolio-willian:latest
+    container_name: portfolio-willian
+    restart: unless-stopped
+    # exposto só no loopback: quem fala com a internet é o proxy do host
+    ports:
+      - "127.0.0.1:8080:80"

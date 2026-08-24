@@ -1,0 +1,9 @@
+.git
+node_modules
+dist
+deploy
+Dockerfile
+docker-compose.yml
+.dockerignore
+DEPLOY.md
+NOTES.md
