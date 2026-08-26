@@ -45,6 +45,16 @@ export interface ContactLink {
    opcionais que nenhum item usa, e `project.repo` deixa de compilar */
 const projects: ProjectEntry[] = [
   {
+    name: "LowSetup",
+    year: "2026",
+    summary: {
+      pt: "Curadoria de periféricos, celulares e consoles por faixa de orçamento: uma escolha por faixa, o motivo em uma linha e link de afiliado. Painel próprio de cadastro, renderizado no servidor para busca e preview de link.",
+      en: "Budget-tier curation of peripherals, phones and consoles: one pick per tier, a one-line reason and an affiliate link. Custom admin panel, server-rendered for search and link previews.",
+    },
+    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
+    live: "https://lowsetup.com",
+  },
+  {
     name: "Lovu",
     year: "2025",
     summary: {
