@@ -20,7 +20,6 @@ export const ui: Dict = {
   "hero.cv": { pt: "Baixar CV", en: "Download CV" },
 
   "education.title": { pt: "Formação", en: "Education" },
-  "experience.current": { pt: "atual", en: "current" },
 
   "projects.live": { pt: "ver online", en: "view live" },
   "projects.repo": { pt: "código", en: "source" },

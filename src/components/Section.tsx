@@ -7,13 +7,15 @@ interface SectionProps {
   children: ReactNode;
 }
 
+/* rótulo à esquerda, conteúdo à direita: a página se lê como um documento */
 export function Section({ id, title, children }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-20 border-t border-line pt-16 pb-20 sm:pt-20 sm:pb-28">
-      <h2 className="mb-10 text-3xl leading-[1.1] font-semibold tracking-[-0.035em] text-text sm:mb-12 sm:text-4xl">
-        {title}
-      </h2>
-      {children}
+    <section
+      id={id}
+      className="grid scroll-mt-20 gap-6 border-t border-line pt-10 pb-20 md:grid-cols-[11rem_1fr] md:gap-10 md:pb-28"
+    >
+      <h2 className="display text-xl text-text md:text-lg">{title}</h2>
+      <div className="max-w-[40rem]">{children}</div>
     </section>
   );
 }

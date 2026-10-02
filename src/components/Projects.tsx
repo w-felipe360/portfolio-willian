@@ -1,88 +1,44 @@
 import { profile } from "@/content/profile";
 import { useLang } from "@/i18n/LanguageProvider";
 import { Section } from "./Section";
-import { ArrowUpRightIcon } from "./icons";
 
 export function Projects() {
   const { t, tx } = useLang();
 
   return (
     <Section id="projects" title={t("section.projects")}>
-      {/* bento: projeto mais recente em destaque, os demais lado a lado */}
-      <ul className="grid gap-3 md:grid-cols-2">
-        {profile.projects.map((project, i) => (
-          <li
-            key={project.name}
-            className={`flex flex-col rounded-xl border border-line bg-surface p-6 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-hover sm:p-8 ${
-              i === 0 ? "md:col-span-2" : ""
-            }`}
-          >
+      <ul className="space-y-14">
+        {profile.projects.map((project) => (
+          <li key={project.name}>
             <div className="flex items-baseline justify-between gap-4">
-              <h3
-                className={`font-semibold tracking-[-0.03em] text-text ${
-                  i === 0 ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"
-                }`}
-              >
+              <h3 className="display text-2xl text-text sm:text-[1.75rem]">
                 {project.live ? (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline hover:decoration-1 hover:underline-offset-4"
-                  >
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
                     {project.name}
                   </a>
                 ) : (
                   project.name
                 )}
               </h3>
-              <span className="font-mono text-xs text-muted tabular-nums">{project.year}</span>
+              <span className="text-sm text-muted">{project.year}</span>
             </div>
 
-            <p className="mt-3 max-w-[62ch] text-sm leading-[1.7] text-text-soft">
-              {tx(project.summary)}
-            </p>
+            <p className="mt-3 text-[0.9375rem] leading-[1.7] text-soft">{tx(project.summary)}</p>
+            <p className="mt-3 text-sm text-muted">{project.tags.join(", ")}</p>
 
-            {/* rodapé preso embaixo: links alinhados entre cards de alturas diferentes */}
-            <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6">
-              <ul className="flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <li key={tag} className="tag">
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-
-              <span className="grow" />
-
+            <p className="mt-4 flex flex-wrap gap-x-5 text-sm">
               {project.live ? (
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link inline-flex items-center gap-1 text-sm font-medium text-text"
-                >
+                <a href={project.live} target="_blank" rel="noopener noreferrer" className="link">
                   {t("projects.live")}
-                  <ArrowUpRightIcon />
                 </a>
               ) : null}
-
               {project.repo ? (
-                <a
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-link inline-flex items-center gap-1 text-sm text-muted hover:text-text"
-                >
+                <a href={project.repo} target="_blank" rel="noopener noreferrer" className="link">
                   {t("projects.repo")}
-                  <ArrowUpRightIcon />
                 </a>
               ) : null}
-
-              {project.privateCode ? (
-                <span className="font-mono text-xs text-muted">{t("projects.private")}</span>
-              ) : null}
-            </div>
+              {project.privateCode ? <span className="text-muted">{t("projects.private")}</span> : null}
+            </p>
           </li>
         ))}
       </ul>
