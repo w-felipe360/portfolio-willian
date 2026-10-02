@@ -3,7 +3,6 @@ import { useLang } from "@/i18n/LanguageProvider";
 import { stagger } from "./Section";
 import { ArrowUpRightIcon, DownloadIcon } from "./icons";
 import portrait from "@/assets/willian.webp";
-
 export function Hero() {
   const { t, tx } = useLang();
 
@@ -11,27 +10,20 @@ export function Hero() {
     <section id="home" className="scroll-mt-28 pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="grid items-end gap-10 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-14">
         <div>
-          <div data-reveal style={stagger(0)}>
-            <span className="badge-ok">
-              <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
-              {tx(profile.available)}
-            </span>
-          </div>
-
-          <h1 data-reveal style={stagger(1)} className="mt-6 text-display font-semibold text-text">
+          <h1 data-reveal style={stagger(0)} className="text-display font-semibold text-text">
             {profile.name}
           </h1>
 
-          <p data-reveal style={stagger(2)} className="mt-5 text-lg font-medium text-text-soft sm:text-xl">
+          <p data-reveal style={stagger(1)} className="mt-5 text-lg font-medium text-text-soft sm:text-xl">
             {tx(profile.role)}
             <span className="font-normal text-muted"> · {tx(profile.location)}</span>
           </p>
 
-          <p data-reveal style={stagger(3)} className="mt-5 max-w-[60ch] leading-[1.7] text-muted">
+          <p data-reveal style={stagger(2)} className="mt-5 max-w-[60ch] leading-[1.7] text-muted">
             {tx(profile.intro)}
           </p>
 
-          <div data-reveal style={stagger(4)} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div data-reveal style={stagger(3)} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
             <a href="#contact" className="group btn-primary">
               {t("hero.cta")}
               <span className="btn-icon" aria-hidden="true">
