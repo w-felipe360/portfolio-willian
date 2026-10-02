@@ -29,6 +29,12 @@
   --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
   /* único ponto de luz da página: estático, quente, quase invisível */
   --spot: rgb(214 196 160 / 0.14);
+  /* moldura externa do "double-bezel" e sombra ambiente bem difusa */
+  --shell: rgb(0 0 0 / 0.025);
+  --shell-ring: rgb(0 0 0 / 0.05);
+  --core-highlight: inset 0 1px 1px rgb(255 255 255 / 0.9);
+  --ambient-shadow: 0 1px 2px rgb(17 17 17 / 0.03), 0 12px 32px -12px rgb(17 17 17 / 0.06);
+  --island: rgb(255 255 255 / 0.72);
 }
 
 .dark {
@@ -50,6 +56,11 @@
   --selection: rgb(251 243 219 / 0.16);
   --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
   --spot: rgb(214 196 160 / 0.04);
+  --shell: rgb(255 255 255 / 0.025);
+  --shell-ring: rgb(255 255 255 / 0.07);
+  --core-highlight: inset 0 1px 1px rgb(255 255 255 / 0.06);
+  --ambient-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 16px 40px -16px rgb(0 0 0 / 0.5);
+  --island: rgb(31 31 31 / 0.72);
 }
 
 @theme inline {
@@ -77,6 +88,9 @@
   --text-display--letter-spacing: -0.045em;
 
   --shadow-hover: var(--hover-shadow);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
@@ -131,12 +145,46 @@
     *::before,
     *::after {
       transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
     }
   }
 }
 
+
+
 @layer components {
-  /* etiqueta de tecnologia: pílula pequena, cinza lavado */
+  /* ------------------------------------------------------- double-bezel */
+  /* casca externa fina + núcleo com raio concêntrico (externo - padding) */
+  .bezel {
+    --bezel-r: 1.5rem;
+    --bezel-p: 0.375rem;
+    border-radius: var(--bezel-r);
+    padding: var(--bezel-p);
+    background-color: var(--shell);
+    box-shadow: 0 0 0 1px var(--shell-ring);
+  }
+
+  .bezel-core {
+    height: 100%;
+    border-radius: calc(var(--bezel-r) - var(--bezel-p));
+    background-color: var(--surface);
+    box-shadow:
+      var(--core-highlight),
+      var(--ambient-shadow);
+  }
+
+  /* card interativo: sobe 2px no hover; só transform, sem animar sombra */
+  .bezel-lift {
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .bezel-lift:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* ---------------------------------------------------------- etiquetas */
   .tag {
     display: inline-flex;
     align-items: center;
@@ -149,7 +197,6 @@
     line-height: 1.25rem;
   }
 
-  /* status com significado: disponível / emprego atual */
   .badge-ok {
     display: inline-flex;
     align-items: center;
@@ -165,19 +212,20 @@
     line-height: 1.25rem;
   }
 
+  /* -------------------------------------------- botão com ícone aninhado */
   .btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    border-radius: 6px;
+    gap: 0.75rem;
+    border-radius: 9999px;
     background-color: var(--cta);
     color: var(--cta-text);
-    padding: 0.625rem 1.125rem;
+    padding: 0.375rem 0.375rem 0.375rem 1.25rem;
     font-size: 0.875rem;
     font-weight: 500;
     transition:
       background-color 0.2s ease,
-      transform 0.15s ease;
+      transform 0.16s var(--ease-out);
   }
 
   .btn-primary:hover {
@@ -185,10 +233,24 @@
   }
 
   .btn-primary:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
 
-  /* link de texto: sublinhado fino sempre visível, engrossa no hover */
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background-color: color-mix(in srgb, var(--cta-text) 14%, transparent);
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .group:hover .btn-icon {
+    transform: translate(2px, -1px) scale(1.05);
+  }
+
   .text-link {
     text-decoration-line: underline;
     text-decoration-color: var(--line-strong);
@@ -201,5 +263,92 @@
 
   .text-link:hover {
     text-decoration-color: currentColor;
+  }
+
+  /* ------------------------------------------------------- nav em ilha */
+  /* único blur da página: elemento pequeno e fixo, sem camada animada atrás */
+  .island {
+    background-color: var(--island);
+    box-shadow:
+      0 0 0 1px var(--shell-ring),
+      var(--ambient-shadow);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+
+  /* ---------------------------------------------- cards com marca própria */
+  /* Cada projeto traz --p-soft/--p-ink/--p-tint do próprio repositório.
+     A cor entra pouca: lavagem leve no card, moldura tingida, selo da logo
+     e o botão de seta. Texto continua nas cores do portfólio (contraste). */
+  .project-brand {
+    --wash: 7%;
+    --ring: 22%;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--p-tint) var(--ring), transparent);
+    background-color: color-mix(in srgb, var(--p-tint) 6%, transparent);
+  }
+
+  .dark .project-brand {
+    --wash: 9%;
+    --ring: 30%;
+  }
+
+  .project-brand .project-core {
+    background-image: radial-gradient(
+      120% 90% at 0% 0%,
+      color-mix(in srgb, var(--p-tint) var(--wash), transparent),
+      transparent 70%
+    );
+  }
+
+  .project-logo {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background-color: var(--p-soft);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--p-ink) 12%, transparent);
+  }
+
+  .project-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* logo sem fundo próprio (ex.: monograma da psicóloga) ganha respiro no selo */
+  .project-logo-padded img {
+    padding: 0.35rem;
+  }
+
+  .project-arrow {
+    background-color: var(--tag);
+  }
+
+  .project-brand .project-arrow {
+    background-color: var(--p-soft);
+    color: var(--p-ink);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--p-ink) 18%, transparent);
+  }
+
+  /* --------------------------------------------------------- reveal */
+  /* Só transform/opacity, sem filter: blur (custaria raster por frame).
+     O estado escondido só existe com .reveal-on no <html>, que o hook liga
+     quando há JS e não há prefers-reduced-motion — sem isso, tudo aparece. */
+  .reveal-on [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 0.7s var(--ease-out),
+      transform 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .reveal-on [data-reveal][data-shown] {
+    opacity: 1;
+    transform: none;
   }
 }

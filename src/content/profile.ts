@@ -1,3 +1,7 @@
+import lowsetupLogo from "@/assets/projects/lowsetup.svg";
+import lovuLogo from "@/assets/projects/lovu.svg";
+import psiLogo from "@/assets/projects/psi.webp";
+
 export type Lang = "pt" | "en";
 
 export type Localized = Record<Lang, string>;
@@ -33,6 +37,20 @@ export interface ProjectEntry {
   live?: string;
   repo?: string;
   privateCode?: boolean;
+  /* identidade do próprio projeto, tirada do repositório dele */
+  brand?: ProjectBrand;
+}
+
+export interface ProjectBrand {
+  logo: string;
+  /** fundo do selo da logo e do botão de seta */
+  soft: string;
+  /** cor do ícone sobre `soft` */
+  ink: string;
+  /** cor que tinge levemente o card */
+  tint: string;
+  /** logo sem fundo próprio: precisa de respiro dentro do selo */
+  padded?: boolean;
 }
 
 export interface ContactLink {
@@ -53,6 +71,7 @@ const projects: ProjectEntry[] = [
     },
     tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
     live: "https://lowsetup.com",
+    brand: { logo: lowsetupLogo, soft: "#121218", ink: "#d1c9fc", tint: "#8f82e6" },
   },
   {
     name: "Lovu",
@@ -63,16 +82,18 @@ const projects: ProjectEntry[] = [
     },
     tags: ["Fastify", "Prisma", "PostgreSQL", "React", "Docker"],
     live: "https://lovuapp.com.br",
+    brand: { logo: lovuLogo, soft: "#ffe2e2", ink: "#4d3636", tint: "#e8a49a" },
   },
   {
     name: "psigabriellebrandao.com",
     year: "2025",
     summary: {
-      pt: "Landing page de página única para psicóloga clínica. Sem backend e sem coleta de dados: só conteúdo, performance e um caminho claro até o WhatsApp.",
-      en: "Single-page landing for a clinical psychologist. No backend, no data collection: just content, performance and a clear path to WhatsApp.",
+      pt: "Site de uma página para uma psicóloga clínica, sem backend e sem coleta de dados. A página leva o visitante direto ao WhatsApp dela.",
+      en: "One-page site for a clinical psychologist, with no backend and no data collection. The page sends visitors straight to her WhatsApp.",
     },
     tags: ["React", "Vite", "Tailwind CSS"],
     live: "https://psigabriellebrandao.com",
+    brand: { logo: psiLogo, soft: "#e2eaf8", ink: "#012c78", tint: "#5e86c9", padded: true },
   },
 ];
 
@@ -93,21 +114,21 @@ export const profile = {
     en: "open to new opportunities",
   } satisfies Localized,
   intro: {
-    pt: "Construo aplicações web de ponta a ponta. Trabalho com React, Next.js, TypeScript e Tailwind no front-end, com Node.js, NestJS, Spring Boot e Grails no back-end, e com PostgreSQL, Docker e AWS na infraestrutura. Integro agentes de IA ao fluxo de desenvolvimento via MCP para automatizar code review e documentação.",
-    en: "I build web applications end to end. I work with React, Next.js, TypeScript and Tailwind on the front-end, with Node.js, NestJS, Spring Boot and Grails on the back-end, and with PostgreSQL, Docker and AWS on the infrastructure. I wire AI agents into the development workflow through MCP to automate code review and documentation.",
+    pt: "Construo aplicações web de ponta a ponta. No front-end uso React, Next.js, TypeScript e Tailwind; no back-end, Node.js, NestJS, Spring Boot e Grails, sobre PostgreSQL, Docker e AWS. Também uso agentes de IA conectados por MCP às ferramentas do time para automatizar procedimentos internos, como code review nos pull requests e documentação de tarefas.",
+    en: "I build web applications end to end. On the front-end I use React, Next.js, TypeScript and Tailwind; on the back-end, Node.js, NestJS, Spring Boot and Grails, running on PostgreSQL, Docker and AWS. I also use AI agents connected through MCP to the team's tools to automate internal procedures, such as pull request reviews and task documentation.",
   } satisfies Localized,
   about: [
     {
-      pt: "Trabalho em aplicações web que precisam funcionar de verdade: interface clara, API previsível e banco bem modelado. Vou do componente ao container em produção.",
-      en: "I work on web applications that actually have to work: a clear interface, a predictable API and a well-modeled database. I go from the component to the container in production.",
+      pt: "Cuido da aplicação inteira, da tela e da API até o banco de dados e o container em produção.",
+      en: "I take care of the whole application, from the screen and the API down to the database and the container in production.",
     },
     {
       pt: "Desde 2021, entre IoT, e-commerce e sistemas integrados a órgãos públicos. Inglês em nível profissional.",
       en: "Since 2021, across IoT, e-commerce and systems integrated with government agencies. Professional-level English.",
     },
     {
-      pt: "Automatizo o que é repetitivo. Hoje uso agentes de IA conectados por MCP às ferramentas do time para fazer code review nos pull requests e manter a documentação de tarefas em dia sem escrita manual.",
-      en: "I automate what is repetitive. Today I use AI agents connected through MCP to the team's tools to review pull requests and keep task documentation current without manual writing.",
+      pt: "No trabalho, uso agentes de IA ligados por MCP às ferramentas do time. Eles revisam os pull requests e mantêm a documentação das tarefas atualizada.",
+      en: "At work I use AI agents connected through MCP to the team's tools. They review pull requests and keep task documentation up to date.",
     },
     {
       pt: "Fora do editor: jogos e ficção científica.",
@@ -159,8 +180,8 @@ export const profile = {
           en: "I lead development and maintenance of the vehicle transfer and registration system in partnership with Detran-PE.",
         },
         {
-          pt: "Front-end em React + TypeScript com Tailwind e shadcn/ui, priorizando fluxos longos de formulário sem perder desempenho.",
-          en: "Front-end in React + TypeScript with Tailwind and shadcn/ui, built around long form flows without losing performance.",
+          pt: "Front-end em React + TypeScript com Tailwind e shadcn/ui, com atenção ao desempenho em formulários longos.",
+          en: "Front-end in React + TypeScript with Tailwind and shadcn/ui, with attention to performance on long forms.",
         },
         {
           pt: "Back-end em Groovy/Grails: regras de negócio, APIs e modelagem e otimização do banco de dados.",
@@ -171,12 +192,12 @@ export const profile = {
           en: "AWS infrastructure, using Amazon S3 for application file storage and management.",
         },
         {
-          pt: "Responsável por integrar agentes de IA ao fluxo de desenvolvimento via MCP, com code review automático nos pull requests.",
-          en: "Responsible for integrating AI agents into the development workflow through MCP, with automated code review on pull requests.",
+          pt: "Integrei agentes de IA ao fluxo de desenvolvimento via MCP, com code review automático nos pull requests.",
+          en: "Integrated AI agents into the development workflow through MCP, with automated code review on pull requests.",
         },
         {
-          pt: "Automatizei a documentação de tarefas e entregas, padronizando o registro técnico e cortando escrita manual repetitiva.",
-          en: "Automated task and delivery documentation, standardizing technical records and cutting repetitive manual writing.",
+          pt: "Automatizei a documentação de tarefas e entregas. O registro técnico ficou padronizado e a escrita manual repetitiva diminuiu.",
+          en: "Automated task and delivery documentation, which standardized technical records and reduced repetitive manual writing.",
         },
       ],
       tags: ["React", "TypeScript", "Grails", "Groovy", "AWS S3", "SQL", "MCP", "IA"],
@@ -188,8 +209,8 @@ export const profile = {
       place: { pt: "São Paulo, BR (remoto)", en: "São Paulo, BR (remote)" },
       bullets: [
         {
-          pt: "Evolução de e-commerces, plataformas digitais e apps móveis, com foco em novas funcionalidades e integrações.",
-          en: "Evolved e-commerce sites, digital platforms and mobile apps, focused on new features and integrations.",
+          pt: "Novas funcionalidades e integrações em e-commerces, plataformas digitais e apps móveis.",
+          en: "Built new features and integrations for e-commerce sites, digital platforms and mobile apps.",
         },
         {
           pt: "Front-end e mobile com React, React Native e TypeScript; back-end e regras de negócio com PHP e Laravel.",

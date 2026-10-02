@@ -7,9 +7,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Stack } from "@/components/Stack";
 import { useLang } from "@/i18n/LanguageProvider";
+import { useReveal } from "@/hooks/useReveal";
 
 export function App() {
   const { t } = useLang();
+  useReveal();
 
   return (
     <>
