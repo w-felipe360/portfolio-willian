@@ -9,7 +9,7 @@ import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from "./icons";
 const NAV: readonly SectionId[] = ["home", "about", "stack", "experience", "projects", "contact"];
 
 const controlClass =
-  "inline-flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-muted transition-colors hover:bg-line/60 hover:text-text";
+  "inline-flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-muted transition-colors hover:bg-surface-muted hover:text-text";
 
 export function SiteHeader() {
   const { t, lang, toggle: toggleLang } = useLang();
@@ -40,7 +40,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 w-full max-w-4xl items-center gap-4 px-5 sm:px-8">
         <a
           href="#home"
-          className="display text-base text-text transition-colors hover:text-soft"
+          className="text-sm font-medium tracking-tight text-text transition-colors hover:text-text-soft"
         >
           {profile.name}
         </a>
@@ -68,7 +68,7 @@ export function SiteHeader() {
             type="button"
             onClick={toggleLang}
             aria-label={t("a11y.lang")}
-            className={`${controlClass} text-sm`}
+            className={`${controlClass} font-mono text-xs`}
           >
             {lang}
           </button>
@@ -106,7 +106,7 @@ export function SiteHeader() {
                   href={`#${id}`}
                   onClick={() => setMenuOpen(false)}
                   aria-current={active === id ? "true" : undefined}
-                  className={`block rounded-md px-3 py-2 transition-colors hover:bg-line/60 ${
+                  className={`block rounded-md px-3 py-2 transition-colors hover:bg-surface-muted ${
                     active === id ? "text-text" : "text-muted"
                   }`}
                 >

@@ -7,22 +7,38 @@ export function Experience() {
 
   return (
     <Section id="experience" title={t("section.experience")}>
-      <ol className="space-y-14">
+      <ol className="border-t border-line">
         {profile.experience.map((job, i) => (
-          <li key={`${job.company}-${i}`}>
-            <p className={`text-sm ${job.current ? "text-ok" : "text-muted"}`}>{tx(job.period)}</p>
-            <h3 className="display mt-1 text-xl text-text">{tx(job.role)}</h3>
-            <p className="text-sm text-muted">
-              {job.company}, {tx(job.place)}
-            </p>
+          <li
+            key={`${job.company}-${i}`}
+            className="grid gap-3 border-b border-line py-8 sm:grid-cols-[10rem_1fr] sm:gap-8"
+          >
+            <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-start">
+              <p className="font-mono text-xs leading-6 text-muted">{tx(job.period)}</p>
+              {job.current ? <span className="badge-ok">{t("experience.current")}</span> : null}
+            </div>
 
-            <ul className="mt-4 list-disc space-y-2 pl-4 text-[0.9375rem] leading-[1.7] text-soft marker:text-muted">
-              {job.bullets.map((bullet, index) => (
-                <li key={index}>{tx(bullet)}</li>
-              ))}
-            </ul>
+            <div>
+              <h3 className="text-base font-medium text-text">
+                {tx(job.role)}
+                <span className="font-normal text-muted"> · {job.company}</span>
+              </h3>
+              <p className="mt-0.5 font-mono text-xs text-muted">{tx(job.place)}</p>
 
-            <p className="mt-4 text-sm text-muted">{job.tags.join(", ")}</p>
+              <ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-[1.7] text-text-soft marker:text-line-strong">
+                {job.bullets.map((bullet, index) => (
+                  <li key={index}>{tx(bullet)}</li>
+                ))}
+              </ul>
+
+              <ul className="mt-5 flex flex-wrap gap-1.5">
+                {job.tags.map((tag) => (
+                  <li key={tag} className="tag">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </li>
         ))}
       </ol>

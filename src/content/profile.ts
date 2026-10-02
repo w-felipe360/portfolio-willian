@@ -92,18 +92,18 @@ export const profile = {
     pt: "aberto a novas oportunidades",
     en: "open to new opportunities",
   } satisfies Localized,
-  headline: {
-    pt: "Construo aplicações web que precisam funcionar de verdade, do componente ao container em produção.",
-    en: "I build web applications that actually have to work, from the component to the container in production.",
-  } satisfies Localized,
   intro: {
-    pt: "Trabalho com React, Next.js, TypeScript e Tailwind no front-end, com Node.js, NestJS, Spring Boot e Grails no back-end, e com PostgreSQL, Docker e AWS na infraestrutura. Integro agentes de IA ao fluxo de desenvolvimento via MCP para automatizar code review e documentação.",
-    en: "I work with React, Next.js, TypeScript and Tailwind on the front-end, with Node.js, NestJS, Spring Boot and Grails on the back-end, and with PostgreSQL, Docker and AWS on the infrastructure. I wire AI agents into the development workflow through MCP to automate code review and documentation.",
+    pt: "Construo aplicações web de ponta a ponta. Trabalho com React, Next.js, TypeScript e Tailwind no front-end, com Node.js, NestJS, Spring Boot e Grails no back-end, e com PostgreSQL, Docker e AWS na infraestrutura. Integro agentes de IA ao fluxo de desenvolvimento via MCP para automatizar code review e documentação.",
+    en: "I build web applications end to end. I work with React, Next.js, TypeScript and Tailwind on the front-end, with Node.js, NestJS, Spring Boot and Grails on the back-end, and with PostgreSQL, Docker and AWS on the infrastructure. I wire AI agents into the development workflow through MCP to automate code review and documentation.",
   } satisfies Localized,
   about: [
     {
-      pt: "Desde 2021, entre IoT, e-commerce e sistemas integrados a órgãos públicos. Gosto de interface clara, API previsível e banco bem modelado. Inglês em nível profissional.",
-      en: "Since 2021, across IoT, e-commerce and systems integrated with government agencies. I care about a clear interface, a predictable API and a well-modeled database. Professional-level English.",
+      pt: "Trabalho em aplicações web que precisam funcionar de verdade: interface clara, API previsível e banco bem modelado. Vou do componente ao container em produção.",
+      en: "I work on web applications that actually have to work: a clear interface, a predictable API and a well-modeled database. I go from the component to the container in production.",
+    },
+    {
+      pt: "Desde 2021, entre IoT, e-commerce e sistemas integrados a órgãos públicos. Inglês em nível profissional.",
+      en: "Since 2021, across IoT, e-commerce and systems integrated with government agencies. Professional-level English.",
     },
     {
       pt: "Automatizo o que é repetitivo. Hoje uso agentes de IA conectados por MCP às ferramentas do time para fazer code review nos pull requests e manter a documentação de tarefas em dia sem escrita manual.",
@@ -114,6 +114,16 @@ export const profile = {
       en: "Outside the editor: games and sci-fi.",
     },
   ] satisfies Localized[],
+  numbers: [
+    {
+      value: "4+",
+      label: { pt: "anos escrevendo código", en: "years writing code" } satisfies Localized,
+    },
+    {
+      value: "3",
+      label: { pt: "anos de experiência profissional", en: "years of professional experience" } satisfies Localized,
+    },
+  ],
   stack: [
     {
       label: { pt: "Front-end", en: "Front-end" },

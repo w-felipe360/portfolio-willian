@@ -15,7 +15,7 @@ export function App() {
     <>
       <a
         href="#home"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-bg focus:px-3 focus:py-2 focus:text-sm focus:ring-1 focus:ring-accent"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-sm focus:ring-1 focus:ring-line-strong"
       >
         {t("a11y.skip")}
       </a>

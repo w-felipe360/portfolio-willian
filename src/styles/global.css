@@ -4,51 +4,79 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ==========================================================================
-   Identidade: página de texto, não landing page. Papel neutro, tinta
-   azul-acinzentada e um único azul de link — link parece link.
-   O ponto de ousadia é a frase do hero em Bricolage Grotesque no tamanho
-   óptico de display; todo o resto é Geist, quieto.
+   Identidade: monocromático quente, editorial. Cor só com significado
+   (status "disponível"/"atual"); o resto é tipografia, linha e espaço.
+   Só cor muda entre temas; tipografia e espaçamento ficam no :root.
    ========================================================================== */
 :root {
-  --bg: #f7f7f5;
-  --text: #1e2126;
-  --soft: #3d424a;
-  --muted: #5e636b;
-  --line: #e3e3df;
-  --accent: #2d46b9;
-  --ok: #2f7d4f;
-  --cta-text: #f7f7f5;
-  --selection: rgb(45 70 185 / 0.14);
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-muted: #f7f6f3;
+  --line: #eaeaea;
+  --line-strong: #d9d8d4;
+  --text: #111111;
+  --text-soft: #2f3437;
+  /* #787774 da referência dá 4.3:1 sobre o fundo; escurecido para passar AA */
+  --muted: #6f6e69;
+  --tag: #f1f1ef;
+  --tag-text: #5f5e5b;
+  --ok: #edf3ec;
+  --ok-text: #346538;
+  --cta: #111111;
+  --cta-hover: #333333;
+  --cta-text: #ffffff;
+  --selection: #fbf3db;
+  --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
+  /* único ponto de luz da página: estático, quente, quase invisível */
+  --spot: rgb(214 196 160 / 0.14);
 }
 
 .dark {
-  --bg: #141518;
-  --text: #e7e8ea;
-  --soft: #c4c7cc;
-  --muted: #9499a1;
-  --line: #2a2c31;
-  --accent: #a3b3ff;
-  --ok: #7cc89a;
-  --cta-text: #141518;
-  --selection: rgb(163 179 255 / 0.2);
+  --bg: #191919;
+  --surface: #1f1f1f;
+  --surface-muted: #232322;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --text: #ededec;
+  --text-soft: #d4d4d2;
+  --muted: #9b9a97;
+  --tag: #2a2a29;
+  --tag-text: #b5b4b0;
+  --ok: #1f2b21;
+  --ok-text: #8cbf91;
+  --cta: #ededec;
+  --cta-hover: #d4d4d2;
+  --cta-text: #111111;
+  --selection: rgb(251 243 219 / 0.16);
+  --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  --spot: rgb(214 196 160 / 0.04);
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-text: var(--text);
-  --color-soft: var(--soft);
-  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-line: var(--line);
-  --color-accent: var(--accent);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
+  --color-muted: var(--muted);
+  --color-tag: var(--tag);
+  --color-tag-text: var(--tag-text);
   --color-ok: var(--ok);
+  --color-ok-text: var(--ok-text);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
   --color-cta-text: var(--cta-text);
 
   --font-sans: "Geist Variable", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque Variable", "Geist Variable", ui-sans-serif, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
 
-  --text-headline: clamp(2.25rem, 6.2vw, 4.25rem);
-  --text-headline--line-height: 1.04;
-  --text-headline--letter-spacing: -0.022em;
+  --text-display: clamp(2.75rem, 9vw, 5rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.045em;
+
+  --shadow-hover: var(--hover-shadow);
 }
 
 @layer base {
@@ -64,9 +92,10 @@
 
   body {
     background-color: var(--bg);
+    background-image: radial-gradient(70% 45% at 50% 0%, var(--spot), transparent 70%);
+    background-repeat: no-repeat;
     color: var(--text);
     font-family: var(--font-sans);
-    font-variant-numeric: tabular-nums;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -88,7 +117,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--text);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -107,56 +136,70 @@
 }
 
 @layer components {
-  /* opsz alto deixa a Bricolage mais expressiva só onde ela é grande */
-  .headline {
-    font-family: var(--font-display);
-    font-size: var(--text-headline);
-    line-height: var(--text-headline--line-height);
-    letter-spacing: var(--text-headline--letter-spacing);
-    font-weight: 600;
-    font-variation-settings: "opsz" 96;
+  /* etiqueta de tecnologia: pílula pequena, cinza lavado */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    background-color: var(--tag);
+    color: var(--tag-text);
+    padding: 0.125rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.25rem;
   }
 
-  .display {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-variation-settings: "opsz" 36;
-    letter-spacing: -0.02em;
+  /* status com significado: disponível / emprego atual */
+  .badge-ok {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--ok);
+    color: var(--ok-text);
+    padding: 0.125rem 0.625rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.25rem;
   }
 
-  .link {
-    color: var(--accent);
-    text-decoration-line: underline;
-    text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
-    transition: text-decoration-color 0.2s ease;
-  }
-
-  .link:hover {
-    text-decoration-color: currentColor;
-  }
-
-  .btn {
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     border-radius: 6px;
-    background-color: var(--text);
+    background-color: var(--cta);
     color: var(--cta-text);
     padding: 0.625rem 1.125rem;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 500;
     transition:
-      opacity 0.2s ease,
+      background-color 0.2s ease,
       transform 0.15s ease;
   }
 
-  .btn:hover {
-    opacity: 0.86;
+  .btn-primary:hover {
+    background-color: var(--cta-hover);
   }
 
-  .btn:active {
+  .btn-primary:active {
     transform: scale(0.98);
+  }
+
+  /* link de texto: sublinhado fino sempre visível, engrossa no hover */
+  .text-link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--line-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition:
+      text-decoration-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .text-link:hover {
+    text-decoration-color: currentColor;
   }
 }

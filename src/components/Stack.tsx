@@ -7,14 +7,26 @@ export function Stack() {
 
   return (
     <Section id="stack" title={t("section.stack")}>
-      <dl className="space-y-5">
-        {profile.stack.map((group) => (
-          <div key={group.items[0]} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-6">
-            <dt className="text-sm font-medium text-text">{tx(group.label)}</dt>
-            <dd className="text-sm leading-[1.7] text-soft">{group.items.join(", ")}</dd>
+      {/* bento assimétrico: o primeiro grupo (front-end, o mais extenso) ocupa duas colunas */}
+      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        {profile.stack.map((group, i) => (
+          <div
+            key={group.items[0]}
+            className={`rounded-xl border border-line bg-surface p-6 sm:p-7 ${
+              i === 0 ? "sm:col-span-2" : ""
+            }`}
+          >
+            <h3 className="text-sm font-medium text-text">{tx(group.label)}</h3>
+            <ul className="mt-4 flex flex-wrap gap-1.5">
+              {group.items.map((item) => (
+                <li key={item} className="tag">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
-      </dl>
+      </div>
     </Section>
   );
 }
