@@ -6,53 +6,38 @@ export function Experience() {
   const { t, tx } = useLang();
 
   return (
-    <Section
-      id="experience"
-      index="03"
-      title={t("section.experience")}
-      hint={t("section.experience.hint")}
-    >
-      <ol className="space-y-12">
+    <Section id="experience" title={t("section.experience")}>
+      <ol className="border-t border-line">
         {profile.experience.map((job, i) => (
-          <li key={`${job.company}-${i}`}>
-            <div className="grid gap-2 sm:grid-cols-[9rem_1fr] sm:gap-6">
-              <p className="font-mono text-xs leading-6 text-muted">
-                {tx(job.period)}
-                {job.current ? (
-                  <span className="ml-2 inline-block size-1.5 translate-y-px rounded-full bg-accent align-middle" />
-                ) : null}
-              </p>
+          <li
+            key={`${job.company}-${i}`}
+            className="grid gap-3 border-b border-line py-8 sm:grid-cols-[10rem_1fr] sm:gap-8"
+          >
+            <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-start">
+              <p className="font-mono text-xs leading-6 text-muted">{tx(job.period)}</p>
+              {job.current ? <span className="badge-ok">{t("experience.current")}</span> : null}
+            </div>
 
-              <div>
-                <h3 className="text-base font-medium text-text">
-                  {tx(job.role)}
-                  <span className="text-muted"> · {job.company}</span>
-                </h3>
-                <p className="mt-0.5 font-mono text-xs text-muted/80">{tx(job.place)}</p>
+            <div>
+              <h3 className="text-base font-medium text-text">
+                {tx(job.role)}
+                <span className="font-normal text-muted"> · {job.company}</span>
+              </h3>
+              <p className="mt-0.5 font-mono text-xs text-muted">{tx(job.place)}</p>
 
-                <ul className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
-                  {job.bullets.map((bullet, index) => (
-                    <li key={index} className="relative pl-4">
-                      <span
-                        className="absolute top-2.5 left-0 size-1 rounded-full bg-accent"
-                        aria-hidden="true"
-                      />
-                      {tx(bullet)}
-                    </li>
-                  ))}
-                </ul>
+              <ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-[1.7] text-text-soft marker:text-line-strong">
+                {job.bullets.map((bullet, index) => (
+                  <li key={index}>{tx(bullet)}</li>
+                ))}
+              </ul>
 
-                <ul className="mt-4 flex flex-wrap gap-1.5">
-                  {job.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="rounded-full bg-accent-soft px-2.5 py-0.5 font-mono text-[0.7rem] text-text/80"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="mt-5 flex flex-wrap gap-1.5">
+                {job.tags.map((tag) => (
+                  <li key={tag} className="tag">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </div>
           </li>
         ))}

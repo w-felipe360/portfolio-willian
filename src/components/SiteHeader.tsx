@@ -8,6 +8,9 @@ import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from "./icons";
 
 const NAV: readonly SectionId[] = ["home", "about", "stack", "experience", "projects", "contact"];
 
+const controlClass =
+  "inline-flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-muted transition-colors hover:bg-surface-muted hover:text-text";
+
 export function SiteHeader() {
   const { t, lang, toggle: toggleLang } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
@@ -33,24 +36,23 @@ export function SiteHeader() {
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 pt-3 pb-1">
-      <div className="glass-blur mx-auto flex h-14 w-full max-w-3xl items-center gap-4 px-5 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
+      <div className="mx-auto flex h-14 w-full max-w-4xl items-center gap-4 px-5 sm:px-8">
         <a
           href="#home"
-          className="font-mono text-sm tracking-tight text-text transition-colors hover:text-accent"
+          className="text-sm font-medium tracking-tight text-text transition-colors hover:text-text-soft"
         >
-          {profile.shortName.toLowerCase()}
-          <span className="text-accent">.braz</span>
+          {profile.name}
         </a>
 
         <nav aria-label={t("nav.home")} className="ml-auto hidden md:block">
-          <ul className="flex items-center gap-5 font-mono text-xs">
+          <ul className="flex items-center gap-6 text-sm">
             {NAV.slice(1).map((id) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
                   aria-current={active === id ? "true" : undefined}
-                  className={`link-underline transition-colors hover:text-text ${
+                  className={`transition-colors hover:text-text ${
                     active === id ? "text-text" : "text-muted"
                   }`}
                 >
@@ -66,9 +68,9 @@ export function SiteHeader() {
             type="button"
             onClick={toggleLang}
             aria-label={t("a11y.lang")}
-            className="rounded-full px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:bg-accent-soft hover:text-text"
+            className={`${controlClass} font-mono text-xs`}
           >
-            {lang === "pt" ? "pt" : "en"}
+            {lang}
           </button>
 
           <button
@@ -76,7 +78,7 @@ export function SiteHeader() {
             onClick={toggleTheme}
             aria-label={t("a11y.theme")}
             aria-pressed={theme === "dark"}
-            className="rounded-full p-2 text-base text-muted transition-colors hover:bg-accent-soft hover:text-text"
+            className={`${controlClass} text-base`}
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
@@ -87,7 +89,7 @@ export function SiteHeader() {
             aria-label={menuOpen ? t("a11y.close") : t("a11y.menu")}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
-            className="rounded-full p-2 text-base text-muted transition-colors hover:bg-accent-soft hover:text-text md:hidden"
+            className={`${controlClass} text-base md:hidden`}
           >
             {menuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
@@ -96,17 +98,15 @@ export function SiteHeader() {
 
       {/* menu mobile: removido da árvore quando fechado, então nada fica tabulável escondido */}
       {menuOpen ? (
-        <nav
-          id="mobile-nav"
-          className="glass mx-auto mt-2 w-full max-w-3xl overflow-hidden md:hidden"
-        >
-          <ul className="grid gap-1 px-4 py-4 font-mono text-sm">
+        <nav id="mobile-nav" className="border-t border-line md:hidden">
+          <ul className="mx-auto grid max-w-4xl gap-0.5 px-3 py-3 text-sm">
             {NAV.map((id) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
                   onClick={() => setMenuOpen(false)}
-                  className={`block rounded-lg px-3 py-2 transition-colors hover:bg-accent-soft ${
+                  aria-current={active === id ? "true" : undefined}
+                  className={`block rounded-md px-3 py-2 transition-colors hover:bg-surface-muted ${
                     active === id ? "text-text" : "text-muted"
                   }`}
                 >

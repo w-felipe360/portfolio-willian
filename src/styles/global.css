@@ -4,70 +4,79 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ==========================================================================
-   Identidade visual: quase-preto + roxo, superfícies de vidro.
-   Só cor muda entre temas; espaçamento e tipografia ficam no :root para
-   não duplicar valores estruturais.
+   Identidade: monocromático quente, editorial. Cor só com significado
+   (status "disponível"/"atual"); o resto é tipografia, linha e espaço.
+   Só cor muda entre temas; tipografia e espaçamento ficam no :root.
    ========================================================================== */
 :root {
-  /* tema claro: lilás muito claro, mesmo roxo de identidade */
-  --bg: hsl(275 22% 96%);
-  --bg-deep: hsl(275 20% 90%);
-  --surface: hsl(0 0% 100% / 0.92);
-  --surface-strong: hsl(0 0% 100% / 0.86);
-  --surface-solid: hsl(0 0% 100%);
-  --line: hsl(275 12% 12% / 0.14);
-  --text: hsl(275 10% 9%);
-  --muted: hsl(275 6% 34%);
-  --accent: hsl(272 72% 46%);
-  --accent-soft: hsl(272 72% 46% / 0.1);
-  --selection: hsl(272 72% 52% / 0.18);
-  --petal: hsl(275 60% 64%);
-  --glow: hsl(275 65% 60% / 0.14);
-  --shadow: 0 20px 50px -32px hsl(275 16% 20% / 0.35);
-  --ambient-opacity: 0.14;
-  /* fundo do retrato recortado: roxo da identidade, dessaturado para não jogar
-     cor na pele nem competir com o CTA */
-  --portrait-from: hsl(272 45% 52%);
-  --portrait-to: hsl(275 48% 34%);
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-muted: #f7f6f3;
+  --line: #eaeaea;
+  --line-strong: #d9d8d4;
+  --text: #111111;
+  --text-soft: #2f3437;
+  /* #787774 da referência dá 4.3:1 sobre o fundo; escurecido para passar AA */
+  --muted: #6f6e69;
+  --tag: #f1f1ef;
+  --tag-text: #5f5e5b;
+  --ok: #edf3ec;
+  --ok-text: #346538;
+  --cta: #111111;
+  --cta-hover: #333333;
+  --cta-text: #ffffff;
+  --selection: #fbf3db;
+  --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
+  /* único ponto de luz da página: estático, quente, quase invisível */
+  --spot: rgb(214 196 160 / 0.14);
 }
 
 .dark {
-  --bg: hsl(272 18% 5%);
-  --bg-deep: hsl(272 22% 2%);
-  --surface: hsl(272 14% 10% / 0.8);
-  --surface-strong: hsl(272 14% 10% / 0.72);
-  --surface-solid: hsl(272 14% 10%);
-  --line: hsl(0 0% 100% / 0.08);
-  --text: hsl(275 12% 96%);
-  --muted: hsl(275 8% 68%);
-  --accent: hsl(272 88% 72%);
-  --accent-soft: hsl(272 80% 60% / 0.16);
-  --selection: hsl(272 75% 50% / 0.4);
-  --petal: hsl(275 72% 46%);
-  --glow: hsl(272 85% 52% / 0.4);
-  --shadow: 0 28px 70px -34px hsl(0 0% 0% / 0.85);
-  --ambient-opacity: 1;
-  --portrait-from: hsl(272 45% 44%);
-  --portrait-to: hsl(275 50% 26%);
+  --bg: #191919;
+  --surface: #1f1f1f;
+  --surface-muted: #232322;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --text: #ededec;
+  --text-soft: #d4d4d2;
+  --muted: #9b9a97;
+  --tag: #2a2a29;
+  --tag-text: #b5b4b0;
+  --ok: #1f2b21;
+  --ok-text: #8cbf91;
+  --cta: #ededec;
+  --cta-hover: #d4d4d2;
+  --cta-text: #111111;
+  --selection: rgb(251 243 219 / 0.16);
+  --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  --spot: rgb(214 196 160 / 0.04);
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-strong: var(--surface-strong);
-  --color-surface-solid: var(--surface-solid);
+  --color-surface-muted: var(--surface-muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-text: var(--text);
+  --color-text-soft: var(--text-soft);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
+  --color-tag: var(--tag);
+  --color-tag-text: var(--tag-text);
+  --color-ok: var(--ok);
+  --color-ok-text: var(--ok-text);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-text: var(--cta-text);
 
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Geist Variable", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
 
-  --text-display: clamp(2.5rem, 9vw, 4rem);
+  --text-display: clamp(2.75rem, 9vw, 5rem);
   --text-display--line-height: 1;
-  --text-display--letter-spacing: -0.04em;
+  --text-display--letter-spacing: -0.045em;
+
+  --shadow-hover: var(--hover-shadow);
 }
 
 @layer base {
@@ -77,18 +86,30 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
     background-color: var(--bg);
-    background-image: radial-gradient(120% 90% at 50% -10%, var(--bg) 40%, var(--bg-deep) 100%);
+    background-image: radial-gradient(70% 45% at 50% 0%, var(--spot), transparent 70%);
+    background-repeat: no-repeat;
     color: var(--text);
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   ::selection {
@@ -96,7 +117,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--text);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -109,221 +130,76 @@
     *,
     *::before,
     *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
   }
 }
 
 @layer components {
-  /* ---------------------------------------------------------------- vidro */
-  /* Sem backdrop-filter: com a camada de pétalas animada atrás, cada frame
-     forçaria o browser a refiltrar a área inteira de todos os cards. O
-     translúcido puro mantém o efeito e sai de graça na composição. */
-  .glass {
-    background-color: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
-    box-shadow:
-      inset 0 1px 0 hsl(0 0% 100% / 0.06),
-      var(--shadow);
-  }
-
-  /* único ponto com blur real: barra do header, área pequena e fixa */
-  .glass-blur {
-    background-color: var(--surface-strong);
-    border: 1px solid var(--line);
-    border-radius: 9999px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow:
-      inset 0 1px 0 hsl(0 0% 100% / 0.06),
-      var(--shadow);
-  }
-
-  /* ------------------------------------------------------------- ambiente */
-  /* camada fixa atrás de tudo: brilhos roxos + pétalas caindo.
-     Regra da camada: animar só transform/opacity, nunca filter/box-shadow. */
-  .ambient {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: var(--ambient-opacity);
-    contain: layout paint style;
-  }
-
-  .ambient::before,
-  .ambient::after {
-    content: "";
-    position: absolute;
-    width: 70vmax;
-    height: 70vmax;
-    border-radius: 50%;
-    /* gradiente já é suave: dispensa filter: blur, que reraster izaria a cada frame */
-    background: radial-gradient(circle, var(--glow) 0%, transparent 62%);
-    animation: glow-drift 32s ease-in-out infinite alternate;
-  }
-
-  .ambient::before {
-    top: -26vmax;
-    left: -18vmax;
-  }
-
-  .ambient::after {
-    right: -22vmax;
-    bottom: -28vmax;
-    animation-delay: -16s;
-  }
-
-  .petal {
-    position: absolute;
-    top: -12vh;
-    left: var(--x);
-    width: var(--size);
-    height: calc(var(--size) * 0.72);
-    background:
-      radial-gradient(60% 60% at 32% 28%, hsl(280 90% 70% / 0.5), transparent 62%),
-      radial-gradient(75% 75% at 58% 58%, var(--petal), transparent 68%);
-    border-radius: 60% 40% 55% 45% / 55% 52% 48% 45%;
-    opacity: 0;
-    animation: petal-fall var(--dur) linear var(--delay) infinite;
-  }
-
-  @keyframes petal-fall {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, 0, 0) rotate(0deg);
-    }
-    10% {
-      opacity: 1;
-    }
-    88% {
-      opacity: 0.85;
-    }
-    100% {
-      opacity: 0;
-      transform: translate3d(var(--drift), 118vh, 0) rotate(var(--spin));
-    }
-  }
-
-  @keyframes glow-drift {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(7vmax, 5vmax, 0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .petal {
-      display: none;
-    }
-  }
-
-  /* --------------------------------------------------------------- glitch */
-  /* falha curta e ocasional no nome; text-shadow para funcionar sobre vidro */
-  .glitch {
-    animation: glitch 7s steps(1, end) infinite;
-  }
-
-  @keyframes glitch {
-    0%,
-    91%,
-    100% {
-      text-shadow: none;
-      transform: none;
-    }
-    92% {
-      text-shadow:
-        -2px 0 var(--accent),
-        2px 0 hsl(190 92% 58%);
-      transform: translateX(1px);
-    }
-    94% {
-      text-shadow:
-        3px 0 var(--accent),
-        -3px 0 hsl(190 92% 58%);
-      transform: translateX(-1px);
-    }
-    96% {
-      text-shadow: -1px 0 var(--accent);
-      transform: none;
-    }
-    98% {
-      text-shadow:
-        1px 0 hsl(190 92% 58%),
-        -1px 0 var(--accent);
-    }
-  }
-
-  /* ------------------------------------------------------------- reveal */
-  /* removido: conteúdo entra na tela sem fade/translate, por pedido do dono */
-
-  /* sublinhado que cresce no hover, usado nos links de texto */
-  .link-underline {
-    position: relative;
-  }
-
-  .link-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    height: 1px;
-    width: 100%;
-    background-color: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s ease-out;
-  }
-
-  .link-underline:hover::after,
-  .link-underline:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  /* ------------------------------------------------------------- retrato */
-  /* blob orgânico por border-radius: acompanha border/ring/box-shadow e não
-     custa raster extra como clip-path ou máscara SVG. */
-  .portrait-blob {
-    border-radius: 58% 42% 39% 61% / 44% 60% 40% 56%;
-  }
-
-  /* fundo do recorte: gradiente estático, sem filter — troca de tema só muda os
-     dois tokens, então nunca precisa de duas versões da imagem */
-  .portrait-fill {
-    background: radial-gradient(
-      120% 110% at 30% 18%,
-      var(--portrait-from) 0%,
-      var(--portrait-to) 72%
-    );
-  }
-
-  /* botão circular de contato/social */
-  .icon-btn {
+  /* etiqueta de tecnologia: pílula pequena, cinza lavado */
+  .tag {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
     border-radius: 9999px;
-    border: 1px solid var(--line);
-    background-color: var(--surface);
-    color: var(--muted);
-    transition:
-      color 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.2s ease;
+    background-color: var(--tag);
+    color: var(--tag-text);
+    padding: 0.125rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.25rem;
   }
 
-  .icon-btn:hover,
-  .icon-btn:focus-visible {
-    color: var(--accent);
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  /* status com significado: disponível / emprego atual */
+  .badge-ok {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--ok);
+    color: var(--ok-text);
+    padding: 0.125rem 0.625rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.25rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6px;
+    background-color: var(--cta);
+    color: var(--cta-text);
+    padding: 0.625rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition:
+      background-color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--cta-hover);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* link de texto: sublinhado fino sempre visível, engrossa no hover */
+  .text-link {
+    text-decoration-line: underline;
+    text-decoration-color: var(--line-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition:
+      text-decoration-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .text-link:hover {
+    text-decoration-color: currentColor;
   }
 }

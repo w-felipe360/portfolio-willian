@@ -123,10 +123,6 @@ export const profile = {
       value: "3",
       label: { pt: "anos de experiência profissional", en: "years of professional experience" } satisfies Localized,
     },
-    {
-      value: "2",
-      label: { pt: "idiomas de trabalho", en: "working languages" } satisfies Localized,
-    },
   ],
   stack: [
     {

@@ -7,23 +7,28 @@ export function Projects() {
   const { t, tx } = useLang();
 
   return (
-    <Section
-      id="projects"
-      index="04"
-      title={t("section.projects")}
-      hint={t("section.projects.hint")}
-    >
-      <ul className="divide-y divide-line border-y border-line">
-        {profile.projects.map((project) => (
-          <li key={project.name} className="group py-7">
+    <Section id="projects" title={t("section.projects")}>
+      {/* bento: projeto mais recente em destaque, os demais lado a lado */}
+      <ul className="grid gap-3 md:grid-cols-2">
+        {profile.projects.map((project, i) => (
+          <li
+            key={project.name}
+            className={`flex flex-col rounded-xl border border-line bg-surface p-6 transition-[border-color,box-shadow] duration-200 hover:border-line-strong hover:shadow-hover sm:p-8 ${
+              i === 0 ? "md:col-span-2" : ""
+            }`}
+          >
             <div className="flex items-baseline justify-between gap-4">
-              <h3 className="text-base font-medium text-text">
+              <h3
+                className={`font-semibold tracking-[-0.03em] text-text ${
+                  i === 0 ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"
+                }`}
+              >
                 {project.live ? (
                   <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-accent focus-visible:text-accent"
+                    className="hover:underline hover:decoration-1 hover:underline-offset-4"
                   >
                     {project.name}
                   </a>
@@ -31,15 +36,18 @@ export function Projects() {
                   project.name
                 )}
               </h3>
-              <span className="font-mono text-xs text-muted">{project.year}</span>
+              <span className="font-mono text-xs text-muted tabular-nums">{project.year}</span>
             </div>
 
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{tx(project.summary)}</p>
+            <p className="mt-3 max-w-[62ch] text-sm leading-[1.7] text-text-soft">
+              {tx(project.summary)}
+            </p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            {/* rodapé preso embaixo: links alinhados entre cards de alturas diferentes */}
+            <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6">
               <ul className="flex flex-wrap gap-1.5">
                 {project.tags.map((tag) => (
-                  <li key={tag} className="font-mono text-[0.7rem] text-muted/80">
+                  <li key={tag} className="tag">
                     {tag}
                   </li>
                 ))}
@@ -52,7 +60,7 @@ export function Projects() {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-accent transition-transform group-hover:translate-x-0.5"
+                  className="text-link inline-flex items-center gap-1 text-sm font-medium text-text"
                 >
                   {t("projects.live")}
                   <ArrowUpRightIcon />
@@ -64,7 +72,7 @@ export function Projects() {
                   href={project.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-muted transition-colors hover:text-text"
+                  className="text-link inline-flex items-center gap-1 text-sm text-muted hover:text-text"
                 >
                   {t("projects.repo")}
                   <ArrowUpRightIcon />
@@ -72,7 +80,7 @@ export function Projects() {
               ) : null}
 
               {project.privateCode ? (
-                <span className="font-mono text-xs text-muted/70">{t("projects.private")}</span>
+                <span className="font-mono text-xs text-muted">{t("projects.private")}</span>
               ) : null}
             </div>
           </li>

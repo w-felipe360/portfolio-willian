@@ -12,9 +12,11 @@ interface ThemeValue {
 
 const ThemeContext = createContext<ThemeValue | null>(null);
 
-/* escuro é o padrão da identidade visual; claro só por escolha explícita */
+/* escolha salva vence; sem escolha, segue o sistema */
 function readInitialTheme(): Theme {
-  return localStorage.getItem(STORAGE_KEY) === "light" ? "light" : "dark";
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -22,7 +24,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     try {
       return readInitialTheme();
     } catch {
-      return "dark";
+      return "light";
     }
   });
 

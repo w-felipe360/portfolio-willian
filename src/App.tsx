@@ -1,5 +1,4 @@
 import { About } from "@/components/About";
-import { Ambient } from "@/components/Ambient";
 import { Contact } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
@@ -16,25 +15,23 @@ export function App() {
     <>
       <a
         href="#home"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-surface-solid focus:px-3 focus:py-2 focus:text-sm focus:ring-1 focus:ring-accent"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-sm focus:ring-1 focus:ring-line-strong"
       >
         {t("a11y.skip")}
       </a>
 
-      <Ambient />
+      <SiteHeader />
 
-      <div className="relative z-10">
-        <SiteHeader />
-
-        <main className="mx-auto w-full max-w-3xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-4xl px-5 sm:px-8">
+        <main>
           <Hero />
           <About />
           <Stack />
           <Experience />
           <Projects />
           <Contact />
-          <SiteFooter />
         </main>
+        <SiteFooter />
       </div>
     </>
   );

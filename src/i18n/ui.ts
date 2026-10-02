@@ -16,17 +16,11 @@ export const ui: Dict = {
   "section.projects": { pt: "Projetos", en: "Projects" },
   "section.contact": { pt: "Contato", en: "Contact" },
 
-  "section.about.hint": { pt: "quem escreve o código", en: "who writes the code" },
-  "section.stack.hint": { pt: "ferramentas do dia a dia", en: "day-to-day tooling" },
-  "section.experience.hint": { pt: "onde passei", en: "where I've been" },
-  "section.projects.hint": { pt: "coisas entregues", en: "things shipped" },
-  "section.contact.hint": { pt: "resposta em até 24h", en: "reply within 24h" },
-
   "hero.cta": { pt: "Falar comigo", en: "Get in touch" },
   "hero.cv": { pt: "Baixar CV", en: "Download CV" },
-  "hero.scroll": { pt: "rolar", en: "scroll" },
 
   "education.title": { pt: "Formação", en: "Education" },
+  "experience.current": { pt: "atual", en: "current" },
 
   "projects.live": { pt: "ver online", en: "view live" },
   "projects.repo": { pt: "código", en: "source" },

@@ -7,7 +7,7 @@ const base: IconProps = {
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.6,
+  strokeWidth: 1.8,
   strokeLinecap: "round",
   strokeLinejoin: "round",
   width: "1em",
@@ -37,22 +37,6 @@ export function ArrowUpRightIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
       <path d="M7 17 17 7M9 7h8v8" />
-    </svg>
-  );
-}
-
-export function ArrowDownIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 5v14M6 13l6 6 6-6" />
-    </svg>
-  );
-}
-
-export function ArrowUpIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 19V5M6 11l6-6 6 6" />
     </svg>
   );
 }

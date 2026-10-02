@@ -10,7 +10,7 @@ sem backend. Build estático servido por Nginx em VPS própria.
 | Build | Vite 6 |
 | UI | React 19 + TypeScript (strict) |
 | Estilo | Tailwind CSS 4 (tokens em `src/styles/global.css`) |
-| Fontes | Inter + JetBrains Mono self-hosted via Fontsource |
+| Fontes | Geist + Geist Mono self-hosted via Fontsource |
 | Ícones | SVG inline em `src/components/icons.tsx` (zero dependência externa) |
 | Testes | Vitest |
 | Deploy | Docker multi-stage → Nginx alpine |
