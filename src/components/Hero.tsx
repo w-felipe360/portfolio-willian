@@ -17,7 +17,13 @@ export function Hero() {
 
           <p data-reveal style={stagger(1)} className="mt-3 text-[1.0625rem] font-medium text-text-soft">
             {tx(profile.role)}
-            <span className="font-normal text-muted"> · {tx(profile.location)}</span>
+            {/* no mobile a cidade desce para a própria linha em vez de quebrar no meio */}
+            <span className="block font-normal text-muted sm:inline">
+              <span className="hidden sm:inline" aria-hidden="true">
+                {" · "}
+              </span>
+              {tx(profile.location)}
+            </span>
           </p>
 
           <p data-reveal style={stagger(2)} className="mt-3 max-w-[60ch] leading-[1.65] text-muted">
