@@ -1,3 +1,4 @@
+import boinkLogo from "@/assets/projects/boink.svg";
 import lowsetupLogo from "@/assets/projects/lowsetup.svg";
 import lovuLogo from "@/assets/projects/lovu.svg";
 import psiLogo from "@/assets/projects/psi.webp";
@@ -72,6 +73,17 @@ const projects: ProjectEntry[] = [
     tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker"],
     live: "https://lowsetup.com",
     brand: { logo: lowsetupLogo, soft: "#121218", ink: "#d1c9fc", tint: "#8f82e6" },
+  },
+  {
+    name: "boink",
+    year: "2026",
+    summary: {
+      pt: "App desktop open source para Windows que baixa vídeo e áudio de qualquer site suportado pelo yt-dlp. Atualiza sozinho pelas releases do GitHub, e um job semanal do CI publica versão nova sempre que sai um yt-dlp mais recente.",
+      en: "Open-source Windows desktop app that downloads video and audio from any site yt-dlp supports. It updates itself from GitHub releases, and a weekly CI job ships a new version whenever a newer yt-dlp is out.",
+    },
+    tags: ["Tauri", "Rust", "React", "TypeScript", "GitHub Actions"],
+    repo: "https://github.com/w-felipe360/boink",
+    brand: { logo: boinkLogo, soft: "#111111", ink: "#f7f6f3", tint: "#f4a28c" },
   },
   {
     name: "Lovu",

@@ -13,17 +13,20 @@ function brandVars(brand?: ProjectBrand): CSSProperties | undefined {
 
 export function Projects() {
   const { t, tx } = useLang();
+  const { projects } = profile;
+  /* depois do destaque os cards vão em pares; se sobrar um, ele ocupa a linha inteira */
+  const isWide = (i: number) => i === 0 || (i === projects.length - 1 && i % 2 === 1);
 
   return (
     <Section id="projects" title={t("section.projects")}>
       {/* bento: projeto mais recente em destaque, os demais lado a lado */}
       <ul className="grid gap-4 md:grid-cols-2">
-        {profile.projects.map((project, i) => (
+        {projects.map((project, i) => (
           <li
             key={project.name}
             data-reveal
             style={{ ...stagger(i), ...brandVars(project.brand) }}
-            className={`bezel ${project.brand ? "project-brand" : ""} ${i === 0 ? "md:col-span-2" : ""}`}
+            className={`bezel ${project.brand ? "project-brand" : ""} ${isWide(i) ? "md:col-span-2" : ""}`}
           >
             <div className="bezel-core project-core bezel-lift group flex flex-col p-6 sm:p-8">
               <div className="flex min-w-0 items-center gap-3.5">
