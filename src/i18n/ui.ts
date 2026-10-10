@@ -16,6 +16,12 @@ export const ui: Dict = {
   "section.projects": { pt: "Projetos", en: "Projects" },
   "section.contact": { pt: "Contato", en: "Contact" },
 
+  /* rótulo à direita do título de cada seção */
+  "meta.about": { pt: "desde 2021", en: "since 2021" },
+  "meta.stack": { pt: "áreas", en: "areas" },
+  "meta.experience": { pt: "hoje", en: "present" },
+  "meta.projects": { pt: "projetos", en: "projects" },
+
   "hero.cta": { pt: "Falar comigo", en: "Get in touch" },
   "hero.cv": { pt: "Baixar CV", en: "Download CV" },
 

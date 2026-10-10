@@ -135,8 +135,8 @@ export const profile = {
       en: "I take care of the whole application, from the screen and the API down to the database and the container in production.",
     },
     {
-      pt: "Desde 2021, entre IoT, e-commerce e sistemas integrados a órgãos públicos. Inglês em nível profissional.",
-      en: "Since 2021, across IoT, e-commerce and systems integrated with government agencies. Professional-level English.",
+      pt: "Desde 2021, entre IoT, e-commerce e sistemas integrados a órgãos públicos.",
+      en: "Since 2021, across IoT, e-commerce and systems integrated with government agencies.",
     },
     {
       pt: "No trabalho, uso agentes de IA ligados por MCP às ferramentas do time. Eles revisam os pull requests e mantêm a documentação das tarefas atualizada.",
@@ -147,16 +147,25 @@ export const profile = {
       en: "Outside the editor: games and sci-fi.",
     },
   ] satisfies Localized[],
-  numbers: [
+  /* faixa logo abaixo do hero: o resumo que um recrutador procura primeiro */
+  facts: [
     {
-      value: "4+",
-      label: { pt: "anos escrevendo código", en: "years writing code" } satisfies Localized,
+      label: { pt: "Experiência profissional", en: "Professional experience" },
+      value: { pt: "3 anos", en: "3 years" },
     },
     {
-      value: "3",
-      label: { pt: "anos de experiência profissional", en: "years of professional experience" } satisfies Localized,
+      label: { pt: "Escrevendo código", en: "Writing code" },
+      value: { pt: "4+ anos", en: "4+ years" },
     },
-  ],
+    {
+      label: { pt: "Agora", en: "Now" },
+      value: { pt: "Solution TI · Detran-PE", en: "Solution TI · Detran-PE" },
+    },
+    {
+      label: { pt: "Inglês", en: "English" },
+      value: { pt: "Nível profissional", en: "Professional level" },
+    },
+  ] satisfies { label: Localized; value: Localized }[],
   stack: [
     {
       label: { pt: "Front-end", en: "Front-end" },

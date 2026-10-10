@@ -21,7 +21,7 @@ describe("conteúdo bilíngue", () => {
       profile.available,
       profile.intro,
       ...profile.about,
-      ...profile.numbers.map((n) => n.label),
+      ...profile.facts.flatMap((f) => [f.label, f.value]),
       ...profile.stack.map((s) => s.label),
       ...profile.experience.flatMap((e) => [e.role, e.period, e.place, ...e.bullets]),
       ...profile.education.map((e) => e.course),

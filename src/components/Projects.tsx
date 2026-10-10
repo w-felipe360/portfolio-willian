@@ -14,73 +14,63 @@ function brandVars(brand?: ProjectBrand): CSSProperties | undefined {
 export function Projects() {
   const { t, tx } = useLang();
   const { projects } = profile;
-  /* depois do destaque os cards vão em pares; se sobrar um, ele ocupa a linha inteira */
-  const isWide = (i: number) => i === 0 || (i === projects.length - 1 && i % 2 === 1);
+  /* grade 2×2 uniforme; se a contagem for ímpar, o último ocupa a linha inteira */
+  const isLastAlone = (i: number) => i === projects.length - 1 && i % 2 === 0;
 
   return (
-    <Section id="projects" title={t("section.projects")}>
-      {/* bento: projeto mais recente em destaque, os demais lado a lado */}
-      <ul className="grid gap-4 md:grid-cols-2">
+    <Section id="projects" title={t("section.projects")} meta={`${projects.length} ${t("meta.projects")}`}>
+      <ul className="grid gap-3 md:grid-cols-2">
         {projects.map((project, i) => (
           <li
             key={project.name}
             data-reveal
             style={{ ...stagger(i), ...brandVars(project.brand) }}
-            className={`bezel ${project.brand ? "project-brand" : ""} ${isWide(i) ? "md:col-span-2" : ""}`}
+            className={`card card-lift flex flex-col gap-2.5 p-[1.125rem] ${project.brand ? "project-brand" : ""} ${
+              isLastAlone(i) ? "md:col-span-2" : ""
+            }`}
           >
-            <div className="bezel-core project-core bezel-lift group flex flex-col p-6 sm:p-8">
-              <div className="flex min-w-0 items-center gap-3.5">
-                {project.brand ? (
-                  <span className={`project-logo ${project.brand.padded ? "project-logo-padded" : ""}`} aria-hidden="true">
-                    <img src={project.brand.logo} alt="" width={40} height={40} />
-                  </span>
-                ) : null}
-                <div className="min-w-0">
-                  <h3
-                    className={`font-semibold tracking-[-0.03em] [overflow-wrap:anywhere] text-text ${
-                      i === 0 ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"
-                    }`}
-                  >
-                    {project.live ? (
-                      <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover:text-text-soft">
-                        {project.name}
-                      </a>
-                    ) : (
-                      project.name
-                    )}
-                  </h3>
-                  <p className="font-mono text-xs text-muted tabular-nums">{project.year}</p>
-                </div>
+            <div className="flex min-w-0 items-center gap-3">
+              {project.brand ? (
+                <span className={`project-logo ${project.brand.padded ? "project-logo-padded" : ""}`} aria-hidden="true">
+                  <img src={project.brand.logo} alt="" width={36} height={36} />
+                </span>
+              ) : null}
+              <div className="min-w-0">
+                <h3 className="text-lg leading-tight font-semibold tracking-[-0.03em] [overflow-wrap:anywhere] text-text">
+                  {project.live ? (
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="hover:text-text-soft">
+                      {project.name}
+                    </a>
+                  ) : (
+                    project.name
+                  )}
+                </h3>
+                <p className="font-mono text-xs text-muted tabular-nums">{project.year}</p>
               </div>
+            </div>
 
-              <p className="mt-4 max-w-[62ch] text-sm leading-[1.7] text-text-soft">{tx(project.summary)}</p>
+            <p className="max-w-[62ch] text-sm leading-[1.6] text-text-soft">{tx(project.summary)}</p>
 
-              {/* rodapé preso embaixo: links alinhados entre cards de alturas diferentes */}
-              <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-6">
-                <ul className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <li key={tag} className="tag">
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
+            {/* rodapé preso embaixo: links alinhados entre cards de alturas diferentes */}
+            <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5 pt-1">
+              <ul className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => (
+                  <li key={tag} className="tag">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
 
-                <span className="grow" />
-
+              <div className="flex items-center gap-4">
                 {project.live ? (
                   <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-text"
+                    className="group inline-flex items-center gap-1 text-[0.8125rem] font-medium text-text"
                   >
                     {t("projects.live")}
-                    <span
-                      className="project-arrow inline-flex size-7 items-center justify-center rounded-full transition-transform duration-400 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-px"
-                      aria-hidden="true"
-                    >
-                      <ArrowUpRightIcon />
-                    </span>
+                    <ArrowUpRightIcon className="transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 ) : null}
 
@@ -89,7 +79,7 @@ export function Projects() {
                     href={project.repo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-link inline-flex items-center gap-1 text-sm text-muted hover:text-text"
+                    className="text-link text-[0.8125rem] text-muted hover:text-text"
                   >
                     {t("projects.repo")}
                   </a>

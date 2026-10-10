@@ -4,6 +4,8 @@ import type { SectionId } from "@/content/profile";
 interface SectionProps {
   id: SectionId;
   title: string;
+  /** rótulo curto à direita do título (ex.: "desde 2021", "4 projetos") */
+  meta?: string;
   children: ReactNode;
 }
 
@@ -12,15 +14,15 @@ export function stagger(i: number): CSSProperties {
   return { "--i": Math.min(i, 6) } as CSSProperties;
 }
 
-export function Section({ id, title, children }: SectionProps) {
+export function Section({ id, title, meta, children }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-28 py-20 sm:py-28">
-      <h2
-        data-reveal
-        className="mb-10 text-3xl leading-[1.1] font-semibold tracking-[-0.035em] text-text sm:mb-14 sm:text-4xl"
-      >
-        {title}
-      </h2>
+    <section id={id} className="scroll-mt-24 border-b border-line py-11 last:border-b-0 sm:py-14">
+      <header data-reveal className="mb-5 flex items-baseline justify-between gap-4">
+        <h2 className="text-2xl leading-[1.1] font-semibold tracking-[-0.035em] text-text sm:text-[1.625rem]">
+          {title}
+        </h2>
+        {meta ? <span className="font-mono text-xs text-muted tabular-nums">{meta}</span> : null}
+      </header>
       {children}
     </section>
   );

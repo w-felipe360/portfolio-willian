@@ -24,7 +24,7 @@ export function App() {
 
       <SiteHeader />
 
-      <div className="mx-auto w-full max-w-4xl px-5 sm:px-8">
+      <div className="mx-auto w-full max-w-[65rem] px-5 sm:px-8">
         <main>
           <Hero />
           <About />

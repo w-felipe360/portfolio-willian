@@ -42,7 +42,7 @@ export function SiteHeader() {
     <>
       {/* ilha flutuante: destacada do topo, largura do conteúdo */}
       <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-        <div className="island flex h-12 w-full max-w-4xl items-center gap-4 rounded-full pr-2 pl-5 md:w-max md:gap-6">
+        <div className="island flex h-12 w-full max-w-[65rem] items-center gap-4 rounded-full pr-2 pl-5 md:w-max md:gap-6">
           <a
             href="#home"
             className="text-sm font-semibold tracking-tight text-text transition-colors hover:text-text-soft"
