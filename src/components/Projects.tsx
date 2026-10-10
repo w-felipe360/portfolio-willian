@@ -67,7 +67,7 @@ export function Projects() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1 text-[0.8125rem] font-medium text-text"
+                    className="group inline-flex items-center gap-1 text-[0.8125rem] font-medium text-accent"
                   >
                     {t("projects.live")}
                     <ArrowUpRightIcon className="transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

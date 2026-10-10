@@ -58,7 +58,7 @@ export function SiteHeader() {
                     href={`#${id}`}
                     aria-current={active === id ? "true" : undefined}
                     className={`rounded-full px-3 py-1.5 transition-colors duration-200 hover:text-text ${
-                      active === id ? "bg-surface-muted text-text" : "text-muted"
+                      active === id ? "bg-accent-soft text-accent" : "text-muted"
                     }`}
                   >
                     {t(`nav.${id}`)}
@@ -128,7 +128,7 @@ export function SiteHeader() {
                 style={{ transitionDelay: menuOpen ? `${80 + i * 50}ms` : "0ms" }}
                 className={`block py-1 text-4xl font-semibold tracking-[-0.035em] transition-[transform,opacity] duration-700 ease-[var(--ease-out)] ${
                   menuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                } ${active === id ? "text-text" : "text-muted"}`}
+                } ${active === id ? "text-accent" : "text-muted"}`}
               >
                 {t(`nav.${id}`)}
               </a>

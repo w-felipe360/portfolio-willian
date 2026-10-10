@@ -4,61 +4,66 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ==========================================================================
-   Identidade: monocromático quente, editorial. Cor só com significado
-   (status "disponível"/"atual"); o resto é tipografia, linha e espaço.
+   Identidade: neutros levemente violeta + destaque violeta. O destaque só
+   marca o que é clicável (CTA, menu ativo, links, chips, foco); o verde
+   só marca status ("atual"). Paleta gerada em OKLCH e medida em AA.
    Só cor muda entre temas; tipografia e espaçamento ficam no :root.
    ========================================================================== */
 :root {
-  --bg: #fbfbfa;
-  --surface: #ffffff;
-  --surface-muted: #f7f6f3;
-  --line: #eaeaea;
-  --line-strong: #d9d8d4;
-  --text: #111111;
-  --text-soft: #2f3437;
-  /* #787774 da referência dá 4.3:1 sobre o fundo; escurecido para passar AA */
-  --muted: #6f6e69;
-  --tag: #f1f1ef;
-  --tag-text: #5f5e5b;
+  --bg: #faf9fe;
+  --surface: #fefeff;
+  --surface-muted: #f5f3fc;
+  --line: #e5e4ed;
+  --line-strong: #d3d1db;
+  --text: #17141e;
+  --text-soft: #33313c;
+  --muted: #64616d;
+  --tag: #f0edf9;
+  --tag-text: #56535f;
   --ok: #edf3ec;
   --ok-text: #346538;
-  --cta: #111111;
-  --cta-hover: #333333;
+  --cta: #6a48b9;
+  --cta-hover: #5a36a5;
   --cta-text: #ffffff;
-  --selection: #fbf3db;
+  /* destaque: só no que é clicável (menu ativo, links, chips, foco) */
+  --accent: #6542b3;
+  --accent-soft: #efecff;
+  --selection: #efecff;
   --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
-  /* único ponto de luz da página: estático, quente, quase invisível */
-  --spot: rgb(214 196 160 / 0.14);
+  /* único ponto de luz da página: estático, violeta, quase invisível */
+  --spot: rgb(101 66 179 / 0.05);
   /* anel de 1px dos cards e sombra ambiente bem difusa */
-  --shell-ring: rgb(0 0 0 / 0.05);
+  --shell-ring: rgb(23 20 30 / 0.06);
   --core-highlight: inset 0 1px 1px rgb(255 255 255 / 0.9);
-  --ambient-shadow: 0 1px 2px rgb(17 17 17 / 0.03), 0 12px 32px -12px rgb(17 17 17 / 0.06);
-  --island: rgb(255 255 255 / 0.72);
+  --ambient-shadow: 0 1px 2px rgb(23 20 30 / 0.03), 0 12px 32px -12px rgb(23 20 30 / 0.07);
+  --island: rgb(254 254 255 / 0.72);
 }
 
 .dark {
-  --bg: #191919;
-  --surface: #1f1f1f;
-  --surface-muted: #232322;
-  --line: rgb(255 255 255 / 0.08);
-  --line-strong: rgb(255 255 255 / 0.16);
-  --text: #ededec;
-  --text-soft: #d4d4d2;
-  --muted: #9b9a97;
-  --tag: #2a2a29;
-  --tag-text: #b5b4b0;
+  --bg: #17161c;
+  --surface: #1e1d23;
+  --surface-muted: #242229;
+  --line: #2c2a31;
+  --line-strong: #403e47;
+  --text: #ebeaf0;
+  --text-soft: #d1d0d7;
+  --muted: #9f9da5;
+  --tag: #2c2a32;
+  --tag-text: #b8b6be;
   --ok: #1f2b21;
   --ok-text: #8cbf91;
-  --cta: #ededec;
-  --cta-hover: #d4d4d2;
-  --cta-text: #111111;
-  --selection: rgb(251 243 219 / 0.16);
+  --cta: #ae99f8;
+  --cta-hover: #bdacfe;
+  --cta-text: #17141e;
+  --accent: #c0b0fe;
+  --accent-soft: #2f2749;
+  --selection: rgb(192 176 254 / 0.2);
   --hover-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
-  --spot: rgb(214 196 160 / 0.04);
+  --spot: rgb(192 176 254 / 0.04);
   --shell-ring: rgb(255 255 255 / 0.07);
   --core-highlight: inset 0 1px 1px rgb(255 255 255 / 0.06);
   --ambient-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 16px 40px -16px rgb(0 0 0 / 0.5);
-  --island: rgb(31 31 31 / 0.72);
+  --island: rgb(30 29 35 / 0.72);
 }
 
 @theme inline {
@@ -77,6 +82,8 @@
   --color-cta: var(--cta);
   --color-cta-hover: var(--cta-hover);
   --color-cta-text: var(--cta-text);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
 
   --font-sans: "Geist Variable", "Helvetica Neue", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
@@ -129,7 +136,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--text);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -253,12 +260,14 @@
     transition:
       color 0.2s ease,
       background-color 0.2s ease,
+      box-shadow 0.2s ease,
       transform 0.16s var(--ease-out);
   }
 
   .chip:hover {
-    background-color: var(--surface-muted);
-    color: var(--text);
+    background-color: var(--accent-soft);
+    color: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
   }
 
   .chip:active {
@@ -267,7 +276,7 @@
 
   .text-link {
     text-decoration-line: underline;
-    text-decoration-color: var(--line-strong);
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25em;
     transition:
@@ -276,7 +285,7 @@
   }
 
   .text-link:hover {
-    text-decoration-color: currentColor;
+    text-decoration-color: var(--accent);
   }
 
   /* ------------------------------------------------------- nav em ilha */
