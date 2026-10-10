@@ -15,19 +15,45 @@ export function useActiveSection(ids: readonly SectionId[]): SectionId {
 
     if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    /* seções cruzando a faixa do meio da tela, e se a página chegou ao fim */
+    const inBand = new Set<Element>();
+    let atBottom = false;
 
-        if (visible[0]) setActive(visible[0].target.id as SectionId);
+    const update = () => {
+      /* a última seção é curta e nunca alcança a faixa do meio; no fim da página ela vence */
+      const current = atBottom ? sections[sections.length - 1] : sections.find((section) => inBand.has(section));
+      if (current) setActive(current.id as SectionId);
+    };
+
+    const bandObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) inBand.add(entry.target);
+          else inBand.delete(entry.target);
+        }
+        update();
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
     );
+    sections.forEach((section) => bandObserver.observe(section));
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    /* sentinela de 1px no fim do documento: visível = página rolada até o fim */
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.height = "1px";
+    document.body.append(sentinel);
+
+    const bottomObserver = new IntersectionObserver(([entry]) => {
+      atBottom = entry.isIntersecting;
+      update();
+    });
+    bottomObserver.observe(sentinel);
+
+    return () => {
+      bandObserver.disconnect();
+      bottomObserver.disconnect();
+      sentinel.remove();
+    };
   }, [ids]);
 
   return active;
