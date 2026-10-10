@@ -151,7 +151,7 @@ export const profile = {
   facts: [
     {
       label: { pt: "Experiência profissional", en: "Professional experience" },
-      value: { pt: "3 anos", en: "3 years" },
+      value: { pt: "2+ anos", en: "2+ years" },
     },
     {
       label: { pt: "Escrevendo código", en: "Writing code" },
@@ -159,7 +159,7 @@ export const profile = {
     },
     {
       label: { pt: "Agora", en: "Now" },
-      value: { pt: "Solution TI · Detran-PE", en: "Solution TI · Detran-PE" },
+      value: { pt: "Solution TI", en: "Solution TI" },
     },
     {
       label: { pt: "Inglês", en: "English" },
